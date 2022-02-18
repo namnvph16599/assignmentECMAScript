@@ -10,7 +10,9 @@ import adminHome from "./src/pages/admin/dashboard";
 import adminProductsHome from "./src/pages/admin/products/index";
 import adminPostsHome from "./src/pages/admin/posts/index";
 import adminProductsAdd from "./src/pages/admin/products/add";
+import adminPostsAdd from "./src/pages/admin/posts/add";
 import adminProductsEdit from "./src/pages/admin/products/edit";
+import adminPostsEdit from "./src/pages/admin/posts/edit";
 import signinPages from "./src/pages/signin";
 import signupPages from "./src/pages/signup";
 import cartPages from "./src/pages/cart";
@@ -71,6 +73,12 @@ router.on({
   },
   "/admin/posts": () => {
     print(adminPostsHome);
+  },
+  "/admin/posts/add": () => {
+    print(adminPostsAdd);
+  },
+  "/admin/posts/:id/edit": ({ data }) => {
+    print(adminPostsEdit, data.id);
   },
   "/signin": () => {
     print(signinPages);
