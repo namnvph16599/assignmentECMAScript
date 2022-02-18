@@ -8,6 +8,7 @@ import newsDetail from "./src/pages/newsDetail.js";
 import detailProduct from "./src/pages/detail";
 import adminHome from "./src/pages/admin/dashboard";
 import adminProductsHome from "./src/pages/admin/products/index";
+import adminPostsHome from "./src/pages/admin/posts/index";
 import adminProductsAdd from "./src/pages/admin/products/add";
 import adminProductsEdit from "./src/pages/admin/products/edit";
 import signinPages from "./src/pages/signin";
@@ -67,6 +68,9 @@ router.on({
   },
   "/admin/products/:id/edit": ({ data }) => {
     print(adminProductsEdit, data.id);
+  },
+  "/admin/posts": () => {
+    print(adminPostsHome);
   },
   "/signin": () => {
     print(signinPages);

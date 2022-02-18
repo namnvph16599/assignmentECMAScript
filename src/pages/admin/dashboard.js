@@ -4,7 +4,6 @@ const adminHome = {
   render() {
     return /*html*/ `
         ${headerAdmin.render()}
-        <h1>Dashboard</h1>
         `;
   },
 };

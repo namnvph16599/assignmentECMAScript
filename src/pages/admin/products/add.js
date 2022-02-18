@@ -10,7 +10,7 @@ const adminProductsAdd = {
         <div class="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
         <div class="sm:flex items-center justify-between">
             <p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal 
-            text-gray-800">Thêm sản phẩm</p>
+            text-gray-800">Add Product</p>
             <a href="/admin/products" class="sm:ml-3">
             <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <!-- Heroicon name: solid/check -->
@@ -31,7 +31,7 @@ const adminProductsAdd = {
                       Product name
                     </label>
                     <div class="mt-1">
-                      <input type="text" name="title" id="title" class="p-4 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-base border border-gray-300 rounded-md" placeholder="">
+                      <input type="text" name="title" id="name" class="p-4 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-base border border-gray-300 rounded-md" placeholder="">
                     </div>
                   </div>
                 <div class="col-span-3">
@@ -104,72 +104,37 @@ const adminProductsAdd = {
     imgPost.addEventListener("change", (e) => {
       imgPreview.src = URL.createObjectURL(imgPost.files[0]);
     });
-
-    $("#form-add-product").validate({
-      rules: {
-        title: {
-          required: true,
-        },
-        price: {
-          required: true,
-        },
-        description: {
-          required: true,
-        },
-        file_upload: {
-          required: true,
-        },
-      },
-      messages: {
-        title: {
-          required: "Please enter  product name",
-        },
-        price: {
-          required: "Please enter  price",
-        },
-        description: {
-          required: "Please enter description",
-        },
-        file_upload: {
-          required: "Please enter image",
-        },
-      },
-      submitHandler: async (form) => {
-        console.log(1);
-        const file = imgPost.files[0];
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("upload_preset", "ecma_asm");
-
-        const { data } = await axios({
-          url: "https://api.cloudinary.com/v1_1/vannam042/image/upload",
-          method: "post",
-          headers: {
-            "Content-Type": "application/x-www-formendcoded",
-          },
-          data: formData,
-        });
-
-        // gọi hàm add call api
-        addProducts({
-          title: document.getElementById("title").value,
-          price: document.getElementById("price").value,
-          description: document.getElementById("about").value,
-          image: data.url,
-        })
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        console.log(2);
-        form.reset();
-      },
-    });
-
     // $("#form-add-product").validate({
+    //   rules: {
+    //     title: {
+    //       required: true,
+    //     },
+    //     price: {
+    //       required: true,
+    //     },
+    //     description: {
+    //       required: true,
+    //     },
+    //     file_upload: {
+    //       required: true,
+    //     },
+    //   },
+    //   messages: {
+    //     title: {
+    //       required: "Please enter  product name",
+    //     },
+    //     price: {
+    //       required: "Please enter  price",
+    //     },
+    //     description: {
+    //       required: "Please enter description",
+    //     },
+    //     file_upload: {
+    //       required: "Please enter image",
+    //     },
+    //   },
     //   submitHandler: async (form) => {
+    //     console.log(1);
     //     const file = imgPost.files[0];
     //     const formData = new FormData();
     //     formData.append("file", file);
@@ -183,31 +148,57 @@ const adminProductsAdd = {
     //       },
     //       data: formData,
     //     });
-    //     // info product khi Thêm
-    //     const postsPost = await {
-    //       title: document.getElementById("title").value,
+    //     // gọi hàm add
+    //     addProducts({
+    //       title: document.getElementById("name").value,
     //       price: document.getElementById("price").value,
     //       description: document.getElementById("about").value,
     //       image: data.url,
-    //     };
-    //     // gọi hàm add call api
-    //     addProducts(postsPost)
+    //     })
     //       .then((result) => {
-    //         alert("Add successful product!");
-    //         window.location.replace("/admin/products");
+    //         console.log(result);
     //       })
     //       .catch((err) => {
     //         console.log(err);
-    //         alert("Add failed product!");
     //       });
+    //     console.log(2);
     //     form.reset();
     //   },
     // });
+    const formAddProduct = document.querySelector("#form-add-product");
+    formAddProduct.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const file = imgPost.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "ecma_asm");
 
-    // formAddProduct.addEventListener("submit", async (e) => {
-    //   e.preventDefault();
-
-    // });
+      const { data } = await axios({
+        url: "https://api.cloudinary.com/v1_1/vannam042/image/upload",
+        method: "post",
+        headers: {
+          "Content-Type": "application/x-www-formendcoded",
+        },
+        data: formData,
+      });
+      // info product khi Thêm
+      const postsPost = await {
+        title: document.getElementById("name").value,
+        price: document.getElementById("price").value,
+        description: document.getElementById("about").value,
+        image: data.url,
+      };
+      // gọi hàm add call api
+      addProducts(postsPost)
+        .then((result) => {
+          alert("Add successful product!");
+          window.location.replace("/admin/products");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Add failed product!");
+        });
+    });
   },
 };
 export default adminProductsAdd;

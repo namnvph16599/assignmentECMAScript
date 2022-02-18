@@ -1,6 +1,6 @@
 const headerAdmin = {
-    render() {
-      return /*html */ `
+  render() {
+    return /*html */ `
           <nav class="bg-gray-800">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -13,7 +13,9 @@ const headerAdmin = {
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     <a href="/admin" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
       
+                   
                     <a href="/admin/products" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Products</a>
+                    <a href="/admin/posts" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Posts</a>
       
                     <!--<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a> -->
       
@@ -130,7 +132,6 @@ const headerAdmin = {
           </div>
         </nav>
           `;
-    },
-  };
-  export default headerAdmin;
-  
+  },
+};
+export default headerAdmin;

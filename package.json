@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "start:server": "json-server-auth db.json --port 3002",
+    "start:server": "json-server-auth db.json --port 3001",
     "build": "vite build",
     "preview": "vite preview"
   },

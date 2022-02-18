@@ -14,11 +14,11 @@ export const addPosts = (post) => {
   const url = `/posts`;
   return instance.post(url, post);
 };
-export const updatePosts = (post) => {
+export const updatePost = (post) => {
   const url = `/posts/${post.id}`;
   return instance.put(url, post);
 };
-export const removePosts = (id) => {
+export const removePost = (id) => {
   const url = `/posts`;
   return instance.delete(url, id);
 };
