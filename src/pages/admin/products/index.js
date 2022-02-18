@@ -1,5 +1,6 @@
 import headerAdmin from "../../../components/admin/header";
-import { getAllProducts } from "../../../instance/products";
+import { getAllProducts, removeProducts } from "../../../instance/products";
+import { reRender } from "../../../utils";
 const adminProductsHome = {
   async render() {
     const { data } = await getAllProducts();
@@ -27,7 +28,6 @@ const adminProductsHome = {
                             <th class="font-normal text-left pl-12">Price</th>
 
                             <th class="font-normal text-left pl-12">Image</th>
-                            <th class="font-normal text-left pl-20">Created</th>
                         </tr>
                     </thead>
                     <tbody class="w-full">
@@ -45,18 +45,14 @@ const adminProductsHome = {
                           <p class="font-medium">${val.price}</p>
                       </td>
                           <td class="pl-5">
-                          <img src="${val.image_url}" alt="" width="100px">
+                          <img src="${val.image}" alt="" width="100px">
                           </td>
                          
-                          <td class="pl-16">
-                          <p class="font-medium">${val.created_at}</p>
-                             
-                          </td>
                           <td>
-                      <a href="/admin/news/${val.id}/edit" class="font-medium text-green-500 hover:text-indigo-900">Edit</a>
+                      <a href="/admin/products/${val.id}/edit" class="font-medium text-base text-green-500 hover:text-indigo-900">Edit</a>
                       </td>
                       <td>
-                      <button data-id=${val.id} class="font-medium btn btn-remove text-red-500 hover:text-indigo-900">Delete</button>
+                      <button data-id=${val.id} class="font-medium text-base btn btn-remove text-red-500 hover:text-indigo-900">Delete</button>
                       </td>
                       </tr>
     
@@ -65,6 +61,24 @@ const adminProductsHome = {
                       .join("")}
                         
         `;
+  },
+  afterRender() {
+    const btnRemove = document.querySelectorAll(".btn-remove");
+    btnRemove.forEach((button) => {
+      const id = button.dataset.id;
+      button.addEventListener("click", () => {
+        if (confirm("Bạn có chắc chắn muốn xóa sp này !")) {
+          removeProducts(id)
+            .then(() => {
+              alert("Xóa thành công !");
+              reRender(adminProductsHome, "#app");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      });
+    });
   },
 };
 export default adminProductsHome;

@@ -1,7 +1,7 @@
 import header from "../components/header";
 import footer from "../components/footer";
-
-const signin = {
+import { signin } from "../instance/user";
+const signinPages = {
   render() {
     return /*html*/ `
         ${header.render()}
@@ -16,7 +16,7 @@ const signin = {
                 
             </p>
           </div>
-          <form class="mt-8 space-y-6" action="#" method="POST">
+          <form class="mt-8 space-y-6" id="form-signin">
             <input type="hidden" name="remember" value="true">
             <div class="rounded-md shadow-sm -space-y-px">
               <div>
@@ -55,5 +55,24 @@ const signin = {
 
         `;
   },
+  afterRender() {
+    const formSignin = document.querySelector("#form-signin");
+    formSignin.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const userCallApi = await signin({
+        email: document.getElementById("email-address").value,
+        password: document.getElementById("password").value,
+      })
+        .then(({ data }) => {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          if (JSON.parse(localStorage.getItem("user")).id == 1) {
+            window.location.href = "/admin";
+          } else {
+            window.location.href = "/";
+          }
+        })
+        .catch((error) => console.log("Sign in false!"));
+    });
+  },
 };
-export default signin;
+export default signinPages;

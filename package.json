@@ -3,17 +3,22 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "start:server": "json-server --watch db.json --port 3002",
+    "start:server": "json-server-auth db.json --port 3002",
     "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
     "eslint": "^8.7.0",
+    "json-server": "^0.17.0",
+    "json-server-auth": "^2.1.0",
     "tailwindcss": "^3.0.18",
     "vite": "^2.7.2"
   },
   "dependencies": {
     "axios": "^0.25.0",
-    "navigo": "^8.11.1"
+    "jquery": "^3.6.0",
+    "jquery-validation": "^1.19.3",
+    "navigo": "^8.11.1",
+    "toastr": "^2.1.4"
   }
 }

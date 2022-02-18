@@ -1,14 +1,16 @@
+import { reRender } from "../utils";
 const header = {
   render() {
     return /*html*/ `
   <!-- This example requires Tailwind CSS v2.0+ -->
+  <header>
   <div class="relative bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
       <div class="flex justify-start lg:w-0 lg:flex-1">
-        <a href="#">
+        <a href="/">
           <span class="sr-only">Workflow</span>
-          <img class="h-8 w-auto sm:h-10" src="data:image/png;base64,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" alt="">
+          <img class="h-8 w-auto sm:h-10" src="https://bizweb.dktcdn.net/100/438/408/themes/848101/assets/logo.svg?1644287733320" alt="">
         </a>
       </div>
       <div class="-mr-2 -my-2 md:hidden">
@@ -24,12 +26,27 @@ const header = {
        
         <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900"> Home </a>
         <a href="/products" class="text-base font-medium text-gray-500 hover:text-gray-900"> Products </a>
+        <a href="/news" class="text-base font-medium text-gray-500 hover:text-gray-900"> News </a>
+
         <a href="/contact" class="text-base font-medium text-gray-500 hover:text-gray-900"> Contact </a>
         <a href="/about" class="text-base font-medium text-gray-500 hover:text-gray-900"> About </a>
       </nav>
-      <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-        <a href="/signin" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"> Sign in </a>
-        <a href="/signup" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#f29e00] hover:bg-[#f28e10]"> Sign up </a>
+      <div  class="box-user hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+      ${
+        localStorage.getItem("user")
+          ? `
+      <a href="#" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 
+      py-2 border border-transparent rounded-md shadow-sm text-base 
+      font-medium text-white bg-[#f29e00] hover:bg-[#f28e10]">${
+        JSON.parse(localStorage.getItem("user")).fullname
+      }</>
+      <a href="#"  class="logout pl-5 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Log out</a>
+      `
+          : `
+      <a href="/signin" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"> Sign in </a>
+      <a href="/signup" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#f29e00] hover:bg-[#f28e10]"> Sign up </a>
+      `
+      }
       </div>
     </div>
   </div>
@@ -130,8 +147,17 @@ const header = {
     </div>
   </div>
 </div>
-
+</header>
         `;
+  },
+  afterRender() {
+    const logout = document.querySelector(".logout");
+    if (logout) {
+      logout.addEventListener("click", () => {
+        localStorage.removeItem("user");
+        reRender(header, "header");
+      });
+    }
   },
 };
 

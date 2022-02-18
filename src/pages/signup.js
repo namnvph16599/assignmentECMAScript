@@ -1,8 +1,9 @@
 import header from "../components/header";
 import footer from "../components/footer";
-const signup = {
-    render() {
-        return /*html*/`
+import { signup } from "../instance/user";
+const signupPages = {
+  render() {
+    return /*html*/ `
         ${header.render()}
         <div class="bg-[#fcaf17] min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
@@ -13,16 +14,20 @@ const signup = {
             <p class="mt-2 text-center text-sm text-gray-600">
             </p>
           </div>
-          <form class="mt-8 space-y-6" action="#" method="POST">
+          <form class="mt-8 space-y-6" id="form-signup">
             <input type="hidden" name="remember" value="true">
             <div class="rounded-md shadow-sm -space-y-px">
               <div>
+                <label for="email-address" class="sr-only">Fullname</label>
+                <input id="fullname" name="text" type="text" autocomplete="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Fullname">
+              </div>
+              <div>
                 <label for="email-address" class="sr-only">Email address</label>
-                <input id="email-address" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
+                <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
               </div>
               <div>
                 <label for="password" class="sr-only">Password</label>
-                <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
+                <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
               </div>
             </div>
       
@@ -49,8 +54,24 @@ const signup = {
       </div>
       ${footer.render()}
 
-        `
-    }
-}
+        `;
+  },
 
-export default signup
+  afterRender() {
+    const formSignup = document.getElementById("form-signup");
+    formSignup.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const response = await signup({
+        fullname: document.getElementById("fullname").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+      })
+        .then(({ data }) => {
+          alert(`Sign up succes! Heloo  ${data.user.fullname}`);
+        })
+        .catch(() => alert("Registration Failed"));
+    });
+  },
+};
+
+export default signupPages;
