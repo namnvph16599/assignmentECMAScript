@@ -1,6 +1,8 @@
 import header from "../components/header";
 import footer from "../components/footer";
-
+import axios from "axios";
+import $ from "jquery";
+import validate from "jquery-validation";
 const contact = {
   render() {
     return /*html*/ `
@@ -8,32 +10,9 @@ const contact = {
         
         <div class="container mx-auto pt-16">
         <div class="lg:flex">
-            <div class="xl:w-2/5 lg:w-2/5 bg-indigo-700 py-16 xl:rounded-bl rounded-tl rounded-tr xl:rounded-tr-none">
+            <div class="xl:w-2/5 lg:w-2/5 bg-[#fcaf17] py-16 xl:rounded-bl rounded-tl rounded-tr xl:rounded-tr-none">
                 <div class="xl:w-5/6 xl:px-0 px-8 mx-auto">
-                    <h1 class="xl:text-4xl text-3xl pb-4 text-white font-bold">Get in touch</h1>
-                    <p class="text-xl text-white pb-8 leading-relaxed font-normal lg:pr-4">Got a question about us? Are you interested in partnering with us? Have some suggestions or just want to say Hi? Just contact us. We are here to asset you.</p>
-                    <div class="flex pb-4 items-center">
-                        <div aria-label="phone icon" role="img">
-                            <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/contact_indigo-svg1.svg" alt="phone"/>
-                            
-                        </div>
-                        <p class="pl-4 text-white text-base">+1 (308) 321 321</p>
-                    </div>
-                    <div class="flex items-center">
-                        <div aria-label="email icon" role="img">
-                            <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/contact_indigo-svg2.svg" alt="email"/>
-                           
-                        </div>
-                        <p class="pl-4 text-white text-base">Info@alphas.com</p>
-                    </div>
-                    <p class="text-lg text-white pt-10 tracking-wide">
-                        545, Street 11, Block F
-                        <br />
-                        Dean Boulevard, Ohio
-                    </p>
-                    <div class=" pt-16" >
-                        <a href="javascript:void(0)" class="text-white font-bold tracking-wide underline focus:outline-none focus:ring-2 focus:ring-white ">View Job Openings</a>
-                    </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.350696692048!2d105.79032271476314!3d21.018649286003814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab69c0cac6d3%3A0x200669ed389bb5c2!2zWU9EWSBZw6puIEjDsmE!5e0!3m2!1svi!2s!4v1645349880799!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
             <div class="xl:w-3/5 lg:w-3/5 bg-gray-200 h-full pt-5 pb-5 xl:pr-5 xl:pl-0 rounded-tr rounded-br">
@@ -57,15 +36,16 @@ const contact = {
                         <div class="w-2/4 max-w-xs">
                             <div class="flex flex-col">
                                 <label for="phone" class="text-gray-800 text-sm font-semibold leading-tight tracking-normal mb-2">Phone</label>
-                                <input required id="phone" name="phone" type="tel" class="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="+92-12-3456789" aria-label="enter your phone number input" />
+                                <input required id="phone" name="phone" type="tel" class="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10      flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="Phone" aria-label="enter your phone number input" />
                             </div>
                         </div>
                     </div>
                     <div class="w-full mt-6">
                         <div class="flex flex-col">
                             <label class="text-sm font-semibold text-gray-800 mb-2" for="message">Message</label>
-                            <textarea placeholder="" name="message" class="border-gray-300 border mb-4 rounded py-2 text-sm outline-none resize-none px-3 focus:border focus:border-indigo-700" rows="8" id="message" aria-label="enter your message input"></textarea>
+                            <textarea placeholder="" name="message" id="message" class="border-gray-300 border rounded  text-sm outline-none resize-none pl-3 pt-3 focus:border focus:border-indigo-700 h-40" id="message" aria-label="enter your message input" ></textarea>
                         </div>
+                        <br />
                         <button type="submit" class="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-3 text-sm leading-6 focus:border-4 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700">Submit</button>
                     </div>
                 </form>
@@ -75,6 +55,70 @@ const contact = {
 
         ${footer.render()}
         `;
+  },
+  afterRender() {
+    $("#contact").validate({
+      rules: {
+        full_name: {
+          required: true,
+        },
+        email: {
+          required: true,
+          email: true,
+        },
+        phone: {
+          required: true,
+          number: true,
+          minlength: 10,
+          maxlength: 10,
+        },
+        message: {
+          required: true,
+        },
+      },
+      submitHandler: async (form) => {
+        await axios({
+          url: "http://localhost:3001/contacts",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: {
+            fullname: $("#full_name").val(),
+            email: $("#email").val(),
+            phone: $("#phone").val(),
+            message: $("#message").val(),
+          },
+        })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((err) => console.log(err));
+        form.submit();
+      },
+    });
+    // document
+    //   .querySelector("#contact")
+    //   .addEventListener("submit", async function (e) {
+    //     e.preventDefault();
+    //     await axios({
+    //       url: "http://localhost:3001/contacts",
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       data: {
+    //         fullname: $("#full_name").val(),
+    //         email: $("#email").val(),
+    //         phone: $("#phone").val(),
+    //         // message: $("#message").val(),
+    //       },
+    //     })
+    //       .then((response) => {
+    //         console.log(response);
+    //       })
+    //       .catch((err) => console.log(err));
+    //   });
   },
 };
 

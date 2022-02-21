@@ -6,7 +6,7 @@ const listProducts = {
     
     <div class="2xl:container 2xl:mx-auto">
     <div class="bg-gray-50 dark:bg-gray-900 text-center lg:py-10 md:py-8 py-6">
-        <p class="w-10/12 mx-auto md:w-full font-semibold lg:text-4xl text-3xl lg:leading-9 md:leading-7 dark:text-white leading-9 text-center text-gray-800">Summer Collection Vol-1</p>
+        <p class="w-10/12 mx-auto md:w-full font-semibold lg:text-4xl text-3xl lg:leading-9 md:leading-7 dark:text-white leading-9 text-center text-gray-800">Products</p>
     </div>
     <div class="py-6 lg:px-20 md:px-6 px-4">
         </div>

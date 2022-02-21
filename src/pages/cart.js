@@ -9,8 +9,8 @@ import { reRender } from "../utils/index";
 const cartPages = {
   render() {
     let cart = [];
-    if (localStorage.getItem("cart")) {
-      cart = JSON.parse(localStorage.getItem("cart"));
+    if (localStorage.getItem("cartEcma")) {
+      cart = JSON.parse(localStorage.getItem("cartEcma"));
     }
     return /*html*/ `
     ${header.render()}
@@ -20,7 +20,7 @@ const cartPages = {
         <table class="w-full whitespace-nowrap">
             <thead>
                 <tr tabindex="0" class="focus:outline-none h-16 w-full text-sm leading-none text-gray-800">
-                    <th class="font-normal text-left pl-4">Product info</th>
+                    <th class="font-normal text-left pl-4">Products info</th>
                     <th class="font-normal text-left pl-12">Price</th>
                     <th class="font-normal text-left pl-12">Quantity</th>
                     <th class="font-normal text-left pl-20">Action</th>
@@ -58,8 +58,12 @@ const cartPages = {
               })
               .join("")}
                   </tbody>
+                 
         </table>
-
+                 
+        <div class="flex  justify-end">
+        <button class="mx-2 my-2 bg-[#fcaf17] transition duration-150 ease-in-out hover:bg-[#fcaf17] rounded text-white px-6 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-600"><a href="/checkout">Button</a></button> 
+        </div>
 
 
   </div>

@@ -3,6 +3,8 @@ import { addProducts } from "../../../instance/products";
 import axios from "axios";
 import $ from "jquery";
 import validate from "jquery-validation";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 const adminProductsAdd = {
   render() {
     return /*html*/ `
@@ -191,12 +193,12 @@ const adminProductsAdd = {
       // gọi hàm add call api
       addProducts(postsPost)
         .then((result) => {
-          alert("Add successful product!");
-          window.location.replace("/admin/products");
+          toastr.success("Add successful product!");
+          window.location.href = "/admin/products";
         })
         .catch((err) => {
           console.log(err);
-          alert("Add failed product!");
+          toastr.error("Add failed product!");
         });
     });
   },

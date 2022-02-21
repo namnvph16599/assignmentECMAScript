@@ -16,11 +16,15 @@ import adminPostsEdit from "./src/pages/admin/posts/edit";
 import signinPages from "./src/pages/signin";
 import signupPages from "./src/pages/signup";
 import cartPages from "./src/pages/cart";
+import checkoutPages from "./src/pages/checkout";
+
 const router = new Navigo("/", { linksSelector: "a" });
 
 const print = async (content, id) => {
   document.getElementById("app").innerHTML = await content.render(id);
-  if (content.afterRender) content.afterRender(id);
+  if (content.afterRender) {
+    content.afterRender(id);
+  }
 };
 
 router.on("/admin/*", () => {}, {
@@ -88,6 +92,9 @@ router.on({
   },
   "/cart": () => {
     print(cartPages);
+  },
+  "/checkout": () => {
+    print(checkoutPages);
   },
 });
 

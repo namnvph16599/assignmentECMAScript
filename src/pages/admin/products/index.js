@@ -1,6 +1,8 @@
 import headerAdmin from "../../../components/admin/header";
 import { getAllProducts, removeProducts } from "../../../instance/products";
 import { reRender } from "../../../utils";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 const adminProductsHome = {
   async render() {
     const { data } = await getAllProducts();
@@ -68,12 +70,15 @@ const adminProductsHome = {
     btnRemove.forEach((button) => {
       const id = button.dataset.id;
       button.addEventListener("click", () => {
-        if (confirm("Bạn có chắc chắn muốn xóa sp này !")) {
+        if (confirm("Are you sure delete product this !")) {
           removeProducts(id)
             .then((response) => {
+              toastr.success("Delete product successfully");
               reRender(adminProductsHome, "#app");
             })
             .catch((err) => {
+              toastr.console.error();
+              ("Delete product failed");
               console.log(err);
             });
         }

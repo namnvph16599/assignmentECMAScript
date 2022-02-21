@@ -1,6 +1,6 @@
 let cart = []; //mangr chứa sản phẩm
-if (localStorage.getItem("cart")) {
-  cart = JSON.parse(localStorage.getItem("cart"));
+if (localStorage.getItem("cartEcma")) {
+  cart = JSON.parse(localStorage.getItem("cartEcma"));
 }
 
 export const addToCart = (newProduct, next) => {
@@ -12,14 +12,14 @@ export const addToCart = (newProduct, next) => {
     // nếu có rồi cộng quantity thêm 1
     existProduct.quantity += newProduct.quantity++;
   }
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cartEcma", JSON.stringify(cart));
   next();
 };
 
 // hàm tăng quantity
 export const increaseQuantity = (id, callback) => {
   cart.find((item) => item.id == id).quantity++;
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cartEcma", JSON.stringify(cart));
   callback();
 };
 
@@ -27,14 +27,16 @@ export const increaseQuantity = (id, callback) => {
 export const decreaseQuantity = (id, callback) => {
   const currentQuantity = cart.find((item) => item.id == id);
   currentQuantity.quantity--;
-  
+
   if (currentQuantity.quantity < 1) {
     const confirm = window.confirm("Are you sure delete product!");
     if (confirm) {
       cart = cart.filter((item) => item.id != id);
+    } else {
+      currentQuantity.quantity = 1;
     }
   }
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cartEcma", JSON.stringify(cart));
   callback();
 };
 
@@ -46,6 +48,6 @@ export const deleteProCart = (id, callback) => {
     cart = cart.filter((item) => item.id != id);
     console.log(cart);
   }
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cartEcma", JSON.stringify(cart));
   callback();
 };

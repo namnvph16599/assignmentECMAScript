@@ -3,6 +3,8 @@ import { getProduct, updateProducts } from "../../../instance/products";
 import axios from "axios";
 import $ from "jquery";
 import validate from "jquery-validation";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 const adminProductsEdit = {
   async render(id) {
     const { data } = await getProduct(id);
@@ -177,10 +179,13 @@ const adminProductsEdit = {
         };
         updateProducts(postsPost)
           .then((data) => {
-            console.log(data);
+            toastr.success("Update products successfully");
             window.location.href = "/admin/products";
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            toastr.error("Update products failed");
+            console.log(err);
+          });
         form.reset();
       },
     });

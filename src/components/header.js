@@ -30,6 +30,8 @@ const header = {
 
         <a href="/contact" class="text-base font-medium text-gray-500 hover:text-gray-900"> Contact </a>
         <a href="/about" class="text-base font-medium text-gray-500 hover:text-gray-900"> About </a>
+        <a href="/cart" class="text-base font-medium text-gray-500 hover:text-gray-900"> Cart </a>
+
       </nav>
       <div  class="box-user hidden md:flex items-center justify-end md:flex-1 lg:w-0">
       ${
