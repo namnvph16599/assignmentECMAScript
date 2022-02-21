@@ -137,6 +137,7 @@ const detailProduct = {
         {
           ...data,
           quantity: inputValueQuantity.value ? +inputValueQuantity.value : 1,
+          priceTotal: Number(inputValueQuantity.value) * Number(data.price),
         },
         () => {
           toastr.success("Add to cart successfully!");

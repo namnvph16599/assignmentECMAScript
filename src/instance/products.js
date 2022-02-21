@@ -9,6 +9,10 @@ export const getProductsbyCate = (id) => {
   const url = `/products?cate_id=${id}`;
   return instance.get(url, id);
 };
+export const getProductsbySeacch = (dataSearch) => {
+  const url = `/products?q=${dataSearch}`;
+  return instance.get(url, dataSearch);
+};
 export const getProduct = (id) => {
   const url = `/products/${id}`;
   return instance.get(url);

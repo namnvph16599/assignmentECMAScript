@@ -3,6 +3,10 @@ if (localStorage.getItem("cartEcma")) {
   cart = JSON.parse(localStorage.getItem("cartEcma"));
 }
 
+const Productprice = (quantity, price) => {
+  return Number(quantity) * Number(price);
+};
+
 export const addToCart = (newProduct, next) => {
   const existProduct = cart.find((item) => item.id === newProduct.id); //kiểm tra xem có id của phẩm đã thêm hay chưa
   // nếu mà chưa có thì push vào mảng cart
@@ -11,6 +15,10 @@ export const addToCart = (newProduct, next) => {
   } else {
     // nếu có rồi cộng quantity thêm 1
     existProduct.quantity += newProduct.quantity++;
+    existProduct.priceTotal = Productprice(
+      existProduct.quantity,
+      existProduct.price
+    );
   }
   localStorage.setItem("cartEcma", JSON.stringify(cart));
   next();
@@ -18,7 +26,9 @@ export const addToCart = (newProduct, next) => {
 
 // hàm tăng quantity
 export const increaseQuantity = (id, callback) => {
-  cart.find((item) => item.id == id).quantity++;
+  const cartNew = cart.find((item) => item.id == id);
+  cartNew.quantity++;
+  cartNew.priceTotal = Number(cartNew.quantity) * Number(cartNew.price);
   localStorage.setItem("cartEcma", JSON.stringify(cart));
   callback();
 };
@@ -27,7 +37,8 @@ export const increaseQuantity = (id, callback) => {
 export const decreaseQuantity = (id, callback) => {
   const currentQuantity = cart.find((item) => item.id == id);
   currentQuantity.quantity--;
-
+  currentQuantity.priceTotal =
+    Number(currentQuantity.quantity) * Number(currentQuantity.price);
   if (currentQuantity.quantity < 1) {
     const confirm = window.confirm("Are you sure delete product!");
     if (confirm) {

@@ -21,6 +21,7 @@ import signinPages from "./src/pages/signin";
 import signupPages from "./src/pages/signup";
 import cartPages from "./src/pages/cart";
 import checkoutPages from "./src/pages/checkout";
+
 const router = new Navigo("/", { linksSelector: "a" });
 
 const print = async (content, id) => {
