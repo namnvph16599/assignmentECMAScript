@@ -13,16 +13,16 @@
   ],
   "category": [
     {
-      "cate_id": 1,
-      "cate_name": "Quần"
+      "id": 1,
+      "cate_name": "Quần update 2"
     },
     {
-      "cate_id": 2,
+      "id": 2,
       "cate_name": "Áo"
     },
     {
-      "cate_id": 3,
-      "cate_name": "Thắt lưng "
+      "cate_name": "Giày nữ",
+      "id": 3
     }
   ],
   "products": [
@@ -243,18 +243,11 @@
       }
     },
     {
-      "id": 21,
-      "title": "sp test 3",
+      "title": "tesst",
       "price": "1",
       "description": "1",
-      "image": "http://res.cloudinary.com/vannam042/image/upload/v1645420147/ecma_asm/rwm9xymedeuzkxb2howu.jpg"
-    },
-    {
-      "title": "sp test 1",
-      "price": "1",
-      "description": "1",
-      "image": "http://res.cloudinary.com/vannam042/image/upload/v1645420218/ecma_asm/bujqslelpaxusqtxtld0.jpg",
-      "id": 22
+      "image": "http://res.cloudinary.com/vannam042/image/upload/v1645424578/ecma_asm/towqr1jtz1jhbxibnw8d.jpg",
+      "id": 21
     }
   ],
   "users": [
@@ -381,20 +374,6 @@
       "img": "http://placeimg.com/640/480/sports",
       "desc": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
       "id": "15"
-    },
-    {
-      "id": "-_ywz9R",
-      "title": "4",
-      "desc": "2",
-      "createdAt": "2022-02-18T17:17:47.362Z",
-      "img": "http://res.cloudinary.com/vannam042/image/upload/v1645203314/ecma_asm/cym9wtnoqhhmgjljtxdz.jpg"
-    },
-    {
-      "title": "test 1",
-      "desc": "1",
-      "createdAt": "2022-02-21T05:08:42.533Z",
-      "img": "http://res.cloudinary.com/vannam042/image/upload/v1645420181/ecma_asm/dttfthaejifbx843c4rd.jpg",
-      "id": "EFG9_gP"
     }
   ],
   "orders": [

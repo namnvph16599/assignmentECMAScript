@@ -158,7 +158,7 @@ const adminProductsAdd = {
     //       image: data.url,
     //     })
     //       .then((result) => {
-    //         console.log(result);
+    //         toastr.success("Add successful product!");
     //       })
     //       .catch((err) => {
     //         console.log(err);

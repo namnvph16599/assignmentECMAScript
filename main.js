@@ -9,9 +9,12 @@ import detailProduct from "./src/pages/detail";
 import adminHome from "./src/pages/admin/dashboard";
 import adminProductsHome from "./src/pages/admin/products/index";
 import adminPostsHome from "./src/pages/admin/posts/index";
+import adminCateHome from "./src/pages/admin/category/index";
+import adminCateAdd from "./src/pages/admin/category/add";
 import adminProductsAdd from "./src/pages/admin/products/add";
 import adminPostsAdd from "./src/pages/admin/posts/add";
 import adminProductsEdit from "./src/pages/admin/products/edit";
+import adminCategoryEdit from "./src/pages/admin/category/edit";
 import adminPostsEdit from "./src/pages/admin/posts/edit";
 import signinPages from "./src/pages/signin";
 import signupPages from "./src/pages/signup";
@@ -83,6 +86,16 @@ router.on({
   },
   "/admin/posts/:id/edit": ({ data }) => {
     print(adminPostsEdit, data.id);
+  },
+  "/admin/category": () => {
+    print(adminCateHome);
+  },
+  "/admin/category/add": () => {
+    print(adminCateAdd);
+  },
+
+  "/admin/category/:id/edit": ({ data }) => {
+    print(adminCategoryEdit, data.id);
   },
   "/signin": () => {
     print(signinPages);
