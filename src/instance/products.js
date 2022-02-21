@@ -4,6 +4,11 @@ export const getAllProducts = () => {
   const url = `/products`;
   return instance.get(url);
 };
+
+export const getProductsbyCate = (id) => {
+  const url = `/products?cate_id=${id}`;
+  return instance.get(url, id);
+};
 export const getProduct = (id) => {
   const url = `/products/${id}`;
   return instance.get(url);

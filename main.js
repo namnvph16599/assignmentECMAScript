@@ -5,6 +5,7 @@ import about from "./src/pages/about.js";
 import products from "./src/pages/products.js";
 import news from "./src/pages/news.js";
 import newsDetail from "./src/pages/newsDetail.js";
+import categoryPages from "./src/pages/category";
 import detailProduct from "./src/pages/detail";
 import adminHome from "./src/pages/admin/dashboard";
 import adminProductsHome from "./src/pages/admin/products/index";
@@ -20,7 +21,6 @@ import signinPages from "./src/pages/signin";
 import signupPages from "./src/pages/signup";
 import cartPages from "./src/pages/cart";
 import checkoutPages from "./src/pages/checkout";
-
 const router = new Navigo("/", { linksSelector: "a" });
 
 const print = async (content, id) => {
@@ -56,6 +56,9 @@ router.on({
   },
   "/products": () => {
     print(products);
+  },
+  "/category/:id": ({ data }) => {
+    print(categoryPages, data.id);
   },
   "/news": () => {
     print(news);
@@ -93,7 +96,6 @@ router.on({
   "/admin/category/add": () => {
     print(adminCateAdd);
   },
-
   "/admin/category/:id/edit": ({ data }) => {
     print(adminCategoryEdit, data.id);
   },

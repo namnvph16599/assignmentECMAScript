@@ -1,9 +1,8 @@
-import listProducts from "../components/listProducts";
 import header from "../components/header";
 import footer from "../components/footer";
-
+import listProducts from "../components/listProducts";
 const products = {
- async render() {
+  async render() {
     return /*html*/ `
          ${header.render()}
          ${await listProducts.render()}
@@ -12,5 +11,8 @@ const products = {
          
          `;
   },
+  afterRender() {
+    if (header.afterRender) header.afterRender();
+  }
 };
 export default products;
