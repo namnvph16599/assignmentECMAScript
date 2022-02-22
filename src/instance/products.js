@@ -29,3 +29,8 @@ export const removeProducts = (id) => {
   const url = `/products/${id}`;
   return instance.delete(url);
 };
+
+export const addOrder = (data) => {
+  const url = `/orders`;
+  return instance.post(url, data);
+}

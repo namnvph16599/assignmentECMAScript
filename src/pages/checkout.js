@@ -2,6 +2,7 @@ import header from "../components/header";
 import footer from "../components/footer";
 import toastr from "toastr";
 import $ from "jquery";
+import { addOrder } from "../instance/products";
 const checkoutPages = {
   render() {
     return /*html*/ `
@@ -78,6 +79,11 @@ const checkoutPages = {
       quantityAll.html(quantityAllValue);
       $(".price_fee_items").html(30 + " $");
       $(".total").html(Number(priceAllValue) + 30 + " $");
+    } else {
+      priceAll.html("");
+      quantityAll.html("");
+      $(".price_fee_items").html("");
+      $(".total").html("");
     }
 
     $("#form-checkout").validate({
@@ -85,6 +91,29 @@ const checkoutPages = {
         fullname: { required: true },
         address: { required: true },
         phone: { required: true, minlength: 10, maxlength: 10 },
+      },
+      submitHandler() {
+        async function handlerCheckout() {
+          const dataCheckout = await {
+            fullname: $("#fullname").val(),
+            address: $("#address").val(),
+            phone: $("#phone").val(),
+            cart: localStorage.getItem("cartEcma"),
+          };
+          addOrder(dataCheckout)
+            .then((result) => {
+              toastr.success("Order successfully !");
+              localStorage.removeItem("cartEcma");
+              localStorage.removeItem("priceAll");
+              localStorage.removeItem("quantityAll");
+              window.location.reload();
+            })
+            .catch((err) => {
+              console.log(err);
+              toastr.error("Order failed !");
+            });
+        }
+        handlerCheckout();
       },
     });
   },
