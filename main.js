@@ -7,6 +7,7 @@ import news from "./src/pages/news.js";
 import newsDetail from "./src/pages/newsDetail.js";
 import categoryPages from "./src/pages/category";
 import detailProduct from "./src/pages/detail";
+import searchPages from "./src/pages/search";
 import adminHome from "./src/pages/admin/dashboard";
 import adminProductsHome from "./src/pages/admin/products/index";
 import adminPostsHome from "./src/pages/admin/posts/index";
@@ -111,6 +112,9 @@ router.on({
   },
   "/checkout": () => {
     print(checkoutPages);
+  },
+  "/?q=a": () => {
+    print(searchPages);
   },
 });
 
