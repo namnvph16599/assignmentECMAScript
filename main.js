@@ -114,7 +114,7 @@ router.on({
   "/checkout": () => {
     print(checkoutPages);
   },
-  "/?q=a": () => {
+  "/search": () => {
     print(searchPages);
   },
   "/updateProfile/:id": ({ data }) => {
