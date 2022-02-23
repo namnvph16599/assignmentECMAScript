@@ -167,7 +167,7 @@ const header = {
           </nav>
         </div>
         <div>
-        <form method="" id="form-search">
+        <form method="" action="/search" id="form-search">
         <div class="relative text-gray-600 focus-within:text-gray-400">
           <span class="absolute inset-y-0 left-0 flex items-center pl-2">
             <button class="p-1 focus:outline-none focus:shadow-outline">
