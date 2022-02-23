@@ -5,7 +5,7 @@ import footer from "../components/footer";
 const news = {
   async render() {
     return /*html*/ `
-    ${header.render()}
+    ${await header.render()}
         ${await listPosts.render()}
     ${footer.render()}
 

@@ -4,9 +4,9 @@ import axios from "axios";
 import $ from "jquery";
 import validate from "jquery-validation";
 const contact = {
-  render() {
+ async render() {
     return /*html*/ `
-        ${header.render()}
+        ${await header.render()}
         
         <div class="container mx-auto pt-16">
         <div class="lg:flex">

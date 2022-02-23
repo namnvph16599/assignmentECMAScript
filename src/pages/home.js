@@ -8,7 +8,7 @@ import listProducts from "../components/listProducts";
 const home = {
   async render() {
     return /*html*/ `
-        ${header.render()}
+        ${await  header.render()}
         ${banner.render()}
         ${await listProducts.render()}
         ${await listPosts.render()}

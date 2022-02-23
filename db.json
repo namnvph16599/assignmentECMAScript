@@ -256,6 +256,12 @@
       "password": "$2a$10$yuNmPIq24Nv7gS4Dx7kxTeJ58hP1rcf8aVi1ThlFKpJQmXUdq/tbG",
       "fullname": "admin 3",
       "id": 1
+    },
+    {
+      "email": "anh02284@gmail.com",
+      "password": "$2a$10$g2MTesxAs4MrGXRqCNYZiOPE.bfHUlvHIf4Zta8QXSWNuP6H2H416",
+      "fullname": "user 1",
+      "id": 2
     }
   ],
   "posts": [

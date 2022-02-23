@@ -4,7 +4,7 @@ import listProducts from "../components/listProducts";
 const products = {
   async render() {
     return /*html*/ `
-         ${header.render()}
+         ${await header.render()}
          ${await listProducts.render()}
          ${footer.render()}
 

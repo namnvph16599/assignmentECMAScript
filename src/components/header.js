@@ -1,7 +1,8 @@
 import { reRender } from "../utils";
 import { getAllCates } from "../instance/cate";
 const header = {
-  render() {
+  async render() {
+    const { data } = await getAllCates();
     return /*html*/ `
     <header>
   <div class="relative bg-white bg-white">
@@ -85,6 +86,22 @@ const header = {
                 Category
               </a>
               <div class="box-category submenu relative lg:absolute w-[250px] top-full lg:top-[110%] left-0 rounded-sm lg:shadow-lg p-4 lg:block lg:opacity-0 lg:invisible group-hover:opacity-100 lg:group-hover:visible lg:group-hover:top-full bg-white transition-[top] duration-300">
+              ${data
+                .map((val, ind) => {
+                  return `
+                <a href="/category/${val.id}" data-id=${val.id} class="
+                              block
+                              text-sm text-body-color
+                              rounded
+                              hover:text-primary
+                              py-[10px]
+                              px-4
+                            ">
+                          ${val.cate_name}
+                          </a>
+                `;
+                })
+                .join("")}
               </div>
             </li>
               <li class="relative group">
@@ -211,16 +228,6 @@ const header = {
       ${JSON.parse(localStorage.getItem("user")).fullname}
     </a>
     <div class="box-acount submenu relative lg:absolute w-[250px] top-full lg:top-[110%] left-0 rounded-sm lg:shadow-lg p-4 lg:block lg:opacity-0 lg:invisible group-hover:opacity-100 lg:group-hover:visible lg:group-hover:top-full bg-white transition-[top] duration-300">
-    <a href="/admin"  class="
-    block
-    text-sm text-body-color
-    rounded
-    hover:text-primary
-    py-[10px]
-    px-4
-  ">
-Admin
-</a>
     <a href="/updateProfile/${
       JSON.parse(localStorage.getItem("user")).id
     }"  class="btn-updateProfile
@@ -275,7 +282,6 @@ Update Profile
     </a>
     </li>
 `
-      
         }
         
         
@@ -287,24 +293,6 @@ Update Profile
         `;
   },
   async afterRender() {
-    const { data } = await getAllCates();
-    const boxCategory = document.querySelector(".box-category");
-    boxCategory.innerHTML = data
-      .map((val, ind) => {
-        return `
-      <a href="/category/${val.id}" data-id=${val.id} class="
-                    block
-                    text-sm text-body-color
-                    rounded
-                    hover:text-primary
-                    py-[10px]
-                    px-4
-                  ">
-                ${val.cate_name}
-                </a>
-      `;
-      })
-      .join("");
     const logout = document.querySelector(".logout");
     if (logout) {
       logout.addEventListener("click", () => {

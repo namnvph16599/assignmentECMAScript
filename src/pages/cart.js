@@ -8,13 +8,13 @@ import {
 import { reRender } from "../utils/index";
 import $ from "jquery";
 const cartPages = {
-  render() {
+ async render() {
     let cart = [];
     if (localStorage.getItem("cartEcma")) {
       cart = JSON.parse(localStorage.getItem("cartEcma"));
     }
     return /*html*/ `
-    ${header.render()}
+    ${await header.render()}
 
     <div class="py-6 lg:px-20 md:px-6 px-4">
     <div class="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">

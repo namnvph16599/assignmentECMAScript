@@ -4,9 +4,9 @@ import toastr from "toastr";
 import $ from "jquery";
 import { addOrder } from "../instance/products";
 const checkoutPages = {
-  render() {
+  async render() {
     return /*html*/ `
-        ${header.render()}
+        ${await header.render()}
         <div class="flex justify-center items-center 2xl:container 2xl:mx-auto lg:py-16 md:py-12 py-9 px-4 md:px-6 lg:px-20 xl:px-44">
             <div class="flex w-full sm:w-9/12 lg:w-full flex-col lg:flex-row justify-center items-center lg:space-x-10 2xl:space-x-36 space-y-12 lg:space-y-0">
                 <div class="flex w-full flex-col justify-start items-start">

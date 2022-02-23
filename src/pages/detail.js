@@ -8,7 +8,7 @@ const detailProduct = {
   async render(id) {
     const { data } = await getProduct(id);
     return /*html */ `
-      ${header.render()}
+      ${await header.render()}
 <div class="bg-white">
 <div class="pt-6">
   <nav aria-label="Breadcrumb">

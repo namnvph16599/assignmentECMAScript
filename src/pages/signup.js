@@ -2,9 +2,9 @@ import header from "../components/header";
 import footer from "../components/footer";
 import { signup } from "../instance/user";
 const signupPages = {
-  render() {
+ async render() {
     return /*html*/ `
-        ${header.render()}
+        ${await header.render()}
         <div class="bg-[#fcaf17] min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
           <div>
