@@ -4,6 +4,7 @@ import contact from "./src/pages/contact.js";
 import about from "./src/pages/about.js";
 import products from "./src/pages/products.js";
 import news from "./src/pages/news.js";
+import updateProfilePages from "./src/pages/updateProfile";
 import newsDetail from "./src/pages/newsDetail.js";
 import categoryPages from "./src/pages/category";
 import detailProduct from "./src/pages/detail";
@@ -115,6 +116,9 @@ router.on({
   },
   "/?q=a": () => {
     print(searchPages);
+  },
+  "/updateProfile/:id": ({ data }) => {
+    print(updateProfilePages, data.id);
   },
 });
 
