@@ -2,7 +2,7 @@ import header from "../components/header";
 import footer from "../components/footer";
 import toastr from "toastr";
 import $ from "jquery";
-import { addOrder } from "../instance/products";
+import { addOrder, addOrderDetail } from "../instance/products";
 const checkoutPages = {
   async render() {
     return /*html*/ `
@@ -28,11 +28,19 @@ const checkoutPages = {
                         <input class="px-2 focus:outline-none dark:bg-transparent 
                         dark:text-gray-400 dark:placeholder-gray-400 focus:ring-2 
                         focus:ring-gray-500 border-b border-gray-200 leading-4 text-base 
+                        placeholder-gray-600 py-4 w-full" type="email" placeholder="Email..." id="email" name="email"/>
+                        <input class="px-2 focus:outline-none dark:bg-transparent 
+                        dark:text-gray-400 dark:placeholder-gray-400 focus:ring-2 
+                        focus:ring-gray-500 border-b border-gray-200 leading-4 text-base 
                         placeholder-gray-600 py-4 w-full" type="text" placeholder="Address" id="address" name="address"/>
                         <input class="focus:outline-none dark:text-gray-400 dark:bg-transparent 
                         dark:placeholder-gray-400 focus:ring-2 focus:ring-gray-500 px-2 border-b 
                         border-gray-200 leading-4 text-base placeholder-gray-600 py-4 w-full" 
                         type="text" placeholder="Phone Number" id="phone" name="phone" />
+                        <input class="px-2 focus:outline-none dark:bg-transparent 
+                        dark:text-gray-400 dark:placeholder-gray-400 focus:ring-2 
+                        focus:ring-gray-500 border-b border-gray-200 leading-4 text-base 
+                        placeholder-gray-600 py-4 w-full" type="text" placeholder="Message" id="message" name="message"/>
                     </div>
                     <button class="focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white focus:ring-gray-500 focus:ring-offset-2 mt-8 text-base font-medium focus:ring-2 focus:ring-ocus:ring-gray-800 leading-4 hover:bg-black py-4 w-full md:w-4/12 lg:w-full text-white bg-gray-800">Proceed to payment</button>
                     </div>
@@ -85,33 +93,51 @@ const checkoutPages = {
       $(".price_fee_items").html("");
       $(".total").html("");
     }
-
+    console.log(JSON.parse(localStorage.getItem("user")).id);
     $("#form-checkout").validate({
       rules: {
         fullname: { required: true },
         address: { required: true },
+        email: { required: true, email: true },
+        message: { required: true },
         phone: { required: true, minlength: 10, maxlength: 10 },
       },
       submitHandler() {
         async function handlerCheckout() {
-          const dataCheckout = await {
+          const dataOrderDetails = await {
+            productsLists: JSON.parse(localStorage.getItem("cartEcma")),
             fullname: $("#fullname").val(),
             address: $("#address").val(),
             phone: $("#phone").val(),
-            cart: localStorage.getItem("cartEcma"),
+            email: $("#email").val(),
+            message: $("#message").val(),
           };
-          addOrder(dataCheckout)
-            .then((result) => {
-              toastr.success("Order successfully !");
-              localStorage.removeItem("cartEcma");
-              localStorage.removeItem("priceAll");
-              localStorage.removeItem("quantityAll");
-              window.location.reload();
-            })
-            .catch((err) => {
-              console.log(err);
-              toastr.error("Order failed !");
-            });
+          if (localStorage.getItem("user")) {
+            addOrderDetail(dataOrderDetails)
+              .then((result) => {
+                addOrder({
+                  userId: JSON.parse(localStorage.getItem("user")).id,
+                  orderDetailId: result.data.id,
+                  status: "Pending",
+                  priceAll: localStorage.getItem("priceAll"),
+                  quantityAll: localStorage.getItem("quantityAll"),
+                })
+                  .then((response) => {
+                    localStorage.removeItem("cartEcma");
+                    localStorage.removeItem("priceAll");
+                    localStorage.removeItem("quantityAll");
+                    toastr.success("Orders success");
+                    window.location.reload();
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    toastr.error("Orders failed");
+                  });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
         }
         handlerCheckout();
       },

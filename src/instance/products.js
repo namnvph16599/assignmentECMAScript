@@ -33,4 +33,30 @@ export const removeProducts = (id) => {
 export const addOrder = (data) => {
   const url = `/orders`;
   return instance.post(url, data);
-}
+};
+export const addOrderDetail = (data) => {
+  const url = `/orderDetails`;
+  return instance.post(url, data);
+};
+
+export const getOrderByUser = (id) => {
+  const url = `/orders?_expand=orderDetail&userId=/${id}`;
+  return instance.get(url, id);
+};
+
+export const removeOrders = (id) => {
+  const url = `/orders/${id}`;
+  return instance.delete(url);
+};
+export const removeOrdersDetails = (id) => {
+  const url = `/orderDetails/${id}`;
+  return instance.delete(url);
+};
+export const getOrderDetailById = (id) => {
+  const url = `orderDetails/${id}`;
+  return instance.get(url);
+};
+export const getOrderByID = (id) => {
+  const url = `/orders/${id}`;
+  return instance.get(url, id);
+};

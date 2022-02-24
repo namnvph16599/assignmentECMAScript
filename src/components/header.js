@@ -240,6 +240,16 @@ const header = {
   ">
 Update Profile
 </a>
+<a href="/orders"  class="
+       block
+       text-sm text-body-color
+       rounded
+       hover:text-primary
+       py-[10px]
+       px-4
+     ">
+     Orders
+     </a>
 <a href="#"  class="logout
        block
        text-sm text-body-color

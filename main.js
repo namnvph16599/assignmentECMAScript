@@ -23,7 +23,8 @@ import signinPages from "./src/pages/signin";
 import signupPages from "./src/pages/signup";
 import cartPages from "./src/pages/cart";
 import checkoutPages from "./src/pages/checkout";
-
+import orderPages from "./src/pages/order";
+import orderDetailPages from "./src/pages/orderDetailPages";
 const router = new Navigo("/", { linksSelector: "a" });
 
 const print = async (content, id) => {
@@ -119,6 +120,12 @@ router.on({
   },
   "/updateProfile/:id": ({ data }) => {
     print(updateProfilePages, data.id);
+  },
+  "/orders": () => {
+    print(orderPages);
+  },
+  "/ordersDetails/:id": ({ data }) => {
+    print(orderDetailPages,data.id);
   },
 });
 
