@@ -106,101 +106,103 @@ const adminProductsAdd = {
     imgPost.addEventListener("change", (e) => {
       imgPreview.src = URL.createObjectURL(imgPost.files[0]);
     });
-    // $("#form-add-product").validate({
-    //   rules: {
-    //     title: {
-    //       required: true,
-    //     },
-    //     price: {
-    //       required: true,
-    //     },
-    //     description: {
-    //       required: true,
-    //     },
-    //     file_upload: {
-    //       required: true,
-    //     },
-    //   },
-    //   messages: {
-    //     title: {
-    //       required: "Please enter  product name",
-    //     },
-    //     price: {
-    //       required: "Please enter  price",
-    //     },
-    //     description: {
-    //       required: "Please enter description",
-    //     },
-    //     file_upload: {
-    //       required: "Please enter image",
-    //     },
-    //   },
-    //   submitHandler: async (form) => {
-    //     console.log(1);
-    //     const file = imgPost.files[0];
-    //     const formData = new FormData();
-    //     formData.append("file", file);
-    //     formData.append("upload_preset", "ecma_asm");
-
-    //     const { data } = await axios({
-    //       url: "https://api.cloudinary.com/v1_1/vannam042/image/upload",
-    //       method: "post",
-    //       headers: {
-    //         "Content-Type": "application/x-www-formendcoded",
-    //       },
-    //       data: formData,
-    //     });
-    //     // gọi hàm add
-    //     addProducts({
-    //       title: document.getElementById("name").value,
-    //       price: document.getElementById("price").value,
-    //       description: document.getElementById("about").value,
-    //       image: data.url,
-    //     })
-    //       .then((result) => {
-    //         toastr.success("Add successful product!");
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //     console.log(2);
-    //     form.reset();
-    //   },
-    // });
-    const formAddProduct = document.querySelector("#form-add-product");
-    formAddProduct.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const file = imgPost.files[0];
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "ecma_asm");
-
-      const { data } = await axios({
-        url: "https://api.cloudinary.com/v1_1/vannam042/image/upload",
-        method: "post",
-        headers: {
-          "Content-Type": "application/x-www-formendcoded",
+    $("#form-add-product").validate({
+      rules: {
+        title: {
+          required: true,
         },
-        data: formData,
-      });
-      // info product khi Thêm
-      const postsPost = await {
-        title: document.getElementById("name").value,
-        price: document.getElementById("price").value,
-        description: document.getElementById("about").value,
-        image: data.url,
-      };
-      // gọi hàm add call api
-      addProducts(postsPost)
-        .then((result) => {
-          toastr.success("Add successful product!");
-          window.location.href = "/admin/products";
-        })
-        .catch((err) => {
-          console.log(err);
-          toastr.error("Add failed product!");
-        });
+        price: {
+          required: true,
+        },
+        description: {
+          required: true,
+        },
+        file_upload: {
+          required: true,
+        },
+      },
+      messages: {
+        title: {
+          required: "Please enter  product name",
+        },
+        price: {
+          required: "Please enter  price",
+        },
+        description: {
+          required: "Please enter description",
+        },
+        file_upload: {
+          required: "Please enter image",
+        },
+      },
+      submitHandler: (form) => {
+        async function handlerUpdateProducts() {
+          console.log(1);
+          const file = imgPost.files[0];
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("upload_preset", "ecma_asm");
+
+          const { data } = await axios({
+            url: "https://api.cloudinary.com/v1_1/vannam042/image/upload",
+            method: "post",
+            headers: {
+              "Content-Type": "application/x-www-formendcoded",
+            },
+            data: formData,
+          });
+          // gọi hàm add
+          addProducts({
+            title: document.getElementById("name").value,
+            price: document.getElementById("price").value,
+            description: document.getElementById("about").value,
+            image: data.url,
+          })
+            .then((result) => {
+              toastr.success("Add successful product!");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          console.log(2);
+        }
+        handlerUpdateProducts();
+      },
     });
+    // const formAddProduct = document.querySelector("#form-add-product");
+    // formAddProduct.addEventListener("submit", async (e) => {
+    //   e.preventDefault();
+    //   const file = imgPost.files[0];
+    //   const formData = new FormData();
+    //   formData.append("file", file);
+    //   formData.append("upload_preset", "ecma_asm");
+
+    //   const { data } = await axios({
+    //     url: "https://api.cloudinary.com/v1_1/vannam042/image/upload",
+    //     method: "post",
+    //     headers: {
+    //       "Content-Type": "application/x-www-formendcoded",
+    //     },
+    //     data: formData,
+    //   });
+    //   // info product khi Thêm
+    //   const postsPost = await {
+    //     title: document.getElementById("name").value,
+    //     price: document.getElementById("price").value,
+    //     description: document.getElementById("about").value,
+    //     image: data.url,
+    //   };
+    //   // gọi hàm add call api
+    //   addProducts(postsPost)
+    //     .then((result) => {
+    //       toastr.success("Add successful product!");
+    //       window.location.href = "/admin/products";
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //       toastr.error("Add failed product!");
+    //     });
+    // });
   },
 };
 export default adminProductsAdd;

@@ -248,13 +248,20 @@
       "description": "1",
       "image": "http://res.cloudinary.com/vannam042/image/upload/v1645424578/ecma_asm/towqr1jtz1jhbxibnw8d.jpg",
       "id": 21
+    },
+    {
+      "title": "tes",
+      "price": "11",
+      "description": "1",
+      "image": "http://res.cloudinary.com/vannam042/image/upload/v1645762151/ecma_asm/wxcatmw1wafzjbdrrtqq.jpg",
+      "id": 22
     }
   ],
   "users": [
     {
       "email": "namnvph16599@fpt.edu.vn",
       "password": "$2a$10$yuNmPIq24Nv7gS4Dx7kxTeJ58hP1rcf8aVi1ThlFKpJQmXUdq/tbG",
-      "fullname": "admin 3",
+      "fullname": "admin ",
       "id": 1
     },
     {

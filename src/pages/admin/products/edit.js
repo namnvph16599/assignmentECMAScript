@@ -153,40 +153,42 @@ const adminProductsEdit = {
           required: "Please enter description",
         },
       },
-      submitHandler: async (form) => {
-        const file = imgPost.files[0];
-        if (file) {
+      submitHandler: (form) => {
+        async function handlerUpdateProducts() {
           const file = imgPost.files[0];
-          const formData = new FormData();
-          formData.append("file", file);
-          formData.append("upload_preset", "ecma_asm");
-          const { data } = await axios({
-            url: "https://api.cloudinary.com/v1_1/vannam042/image/upload",
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-formendcoded",
-            },
-            data: formData,
-          });
-          imgUploadLink = data.url;
+          if (file) {
+            const file = imgPost.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "ecma_asm");
+            const { data } = await axios({
+              url: "https://api.cloudinary.com/v1_1/vannam042/image/upload",
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-formendcoded",
+              },
+              data: formData,
+            });
+            imgUploadLink = data.url;
+          }
+          const postsPost = await {
+            id,
+            title: document.getElementById("title").value,
+            price: document.getElementById("price").value,
+            description: document.getElementById("about").value,
+            image: imgUploadLink ? imgUploadLink : imgPreview.src,
+          };
+          updateProducts(postsPost)
+            .then((data) => {
+              toastr.success("Update products successfully");
+              window.location.href = "/admin/products";
+            })
+            .catch((err) => {
+              toastr.error("Update products failed");
+              console.log(err);
+            });
         }
-        const postsPost = await {
-          id,
-          title: document.getElementById("title").value,
-          price: document.getElementById("price").value,
-          description: document.getElementById("about").value,
-          image: imgUploadLink ? imgUploadLink : imgPreview.src,
-        };
-        updateProducts(postsPost)
-          .then((data) => {
-            toastr.success("Update products successfully");
-            window.location.href = "/admin/products";
-          })
-          .catch((err) => {
-            toastr.error("Update products failed");
-            console.log(err);
-          });
-        form.reset();
+        handlerUpdateProducts();
       },
     });
     // const file = e.target.files[0];
