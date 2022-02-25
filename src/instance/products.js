@@ -43,6 +43,10 @@ export const getOrderByUser = (id) => {
   const url = `/orders?_expand=orderDetail&userId=/${id}`;
   return instance.get(url, id);
 };
+export const getAllOrders = () => {
+  const url = `/orders`;
+  return instance.get(url);
+};
 
 export const removeOrders = (id) => {
   const url = `/orders/${id}`;

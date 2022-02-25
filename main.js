@@ -13,6 +13,7 @@ import adminHome from "./src/pages/admin/dashboard";
 import adminProductsHome from "./src/pages/admin/products/index";
 import adminPostsHome from "./src/pages/admin/posts/index";
 import adminCateHome from "./src/pages/admin/category/index";
+import adminOrdersPages from "./src/pages/admin/orders/index";
 import adminCateAdd from "./src/pages/admin/category/add";
 import adminProductsAdd from "./src/pages/admin/products/add";
 import adminPostsAdd from "./src/pages/admin/posts/add";
@@ -100,6 +101,9 @@ router.on({
   "/admin/category/add": () => {
     print(adminCateAdd);
   },
+  "/admin/orders": () => {
+    print(adminOrdersPages);
+  },
   "/admin/category/:id/edit": ({ data }) => {
     print(adminCategoryEdit, data.id);
   },
@@ -125,7 +129,7 @@ router.on({
     print(orderPages);
   },
   "/ordersDetails/:id": ({ data }) => {
-    print(orderDetailPages,data.id);
+    print(orderDetailPages, data.id);
   },
 });
 
