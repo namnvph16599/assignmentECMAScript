@@ -62,6 +62,7 @@ const adminProductsHome = {
                         `;
                       })
                       .join("")}
+                      
                         
         `;
   },

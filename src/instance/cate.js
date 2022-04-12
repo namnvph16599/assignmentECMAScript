@@ -1,24 +1,24 @@
 import instance from "./instance";
 
 export const getAllCates = () => {
-  const url = "/category";
+  const url = "/categories";
   return instance.get(url);
 };
 
 export const getCate = (id) => {
-  const url = `/category/${id}`;
+  const url = `/categories/${id}`;
   return instance.get(url);
 };
 
 export const addCate = (post) => {
-  const url = "/category";
+  const url = "/categories";
   return instance.post(url, post);
 };
 export const updateCate = (post) => {
-  const url = `/category/${post.id}`;
+  const url = `/categories/${post.id}`;
   return instance.put(url, post);
 };
 export const removeCategory = (id) => {
-  const url = `/category/${id}`;
+  const url = `/categories/${id}`;
   return instance.delete(url, id);
 };

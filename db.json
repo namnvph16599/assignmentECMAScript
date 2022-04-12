@@ -261,7 +261,7 @@
     {
       "email": "namnvph16599@fpt.edu.vn",
       "password": "$2a$10$yuNmPIq24Nv7gS4Dx7kxTeJ58hP1rcf8aVi1ThlFKpJQmXUdq/tbG",
-      "fullname": "admin ",
+      "fullname": "admin 1",
       "id": 1
     },
     {
@@ -371,56 +371,8 @@
       "id": "15"
     }
   ],
-  "orders": [
-    {
-      "userId": 2,
-      "orderDetailId": 1,
-      "status": "Pending",
-      "priceAll": "66",
-      "quantityAll": "3",
-      "id": 1
-    }
-  ],
-  "orderDetails": [
-    {
-      "productsLists": [
-        {
-          "id": 1,
-          "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-          "price": 1,
-          "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-          "cate_id": 1,
-          "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qjm5037-den.jpg?v=1640228927000",
-          "rating": {
-            "rate": 3.9,
-            "count": 120
-          },
-          "quantity": 2,
-          "priceTotal": 2
-        },
-        {
-          "id": 9,
-          "title": "WD 2TB Elements Portable External Hard Drive - USB 3.0 ",
-          "price": 64,
-          "description": "USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system",
-          "cate_id": 3,
-          "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/tlm4025-den-3.jpg?v=1642753487000",
-          "rating": {
-            "rate": 3.3,
-            "count": 203
-          },
-          "quantity": 1,
-          "priceTotal": 64
-        }
-      ],
-      "fullname": "Ngô Văn Nam",
-      "address": "Vọng nguyệt - Tam gian -Yên phong -Bắc Ninh",
-      "phone": "0376021530",
-      "email": "namnvph16599@fpt.edu.vn",
-      "message": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "id": 1
-    }
-  ],
+  "orders": [],
+  "orderDetails": [],
   "banner": [
     {
       "banner_id": 1,
